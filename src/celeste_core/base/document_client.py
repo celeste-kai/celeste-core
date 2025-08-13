@@ -1,0 +1,42 @@
+from __future__ import annotations
+
+from abc import ABC, abstractmethod
+from typing import Any, AsyncIterator
+
+from celeste_core.enums.capability import Capability
+from celeste_core.enums.providers import Provider
+from celeste_core.models.registry import supports
+
+
+class BaseDocClient(ABC):
+    def __init__(
+        self,
+        model: str,
+        capability: Capability = Capability.DOCUMENT_INTELLIGENCE,
+        provider: Provider | None = None,
+        **kwargs: Any,
+    ) -> None:
+        """Initialize document client with common validation logic."""
+        self.model_name = model
+        if provider is None:
+            raise ValueError("provider is required for capability validation")
+        if not supports(provider, self.model_name, capability):
+            raise ValueError(
+                f"Model '{self.model_name}' does not support {capability} "
+                f"for provider {provider.value}"
+            )
+
+    @abstractmethod
+    async def generate_content(self, prompt: str, documents: Any, **kwargs: Any) -> Any:
+        """Generate a single response from prompt and documents."""
+        raise NotImplementedError
+
+    @abstractmethod
+    async def stream_generate_content(
+        self, prompt: str, documents: Any, **kwargs: Any
+    ) -> AsyncIterator[Any]:
+        """Stream the response chunk by chunk."""
+        raise NotImplementedError
+
+
+__all__ = ["BaseDocClient"]
