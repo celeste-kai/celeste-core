@@ -298,6 +298,37 @@ CATALOG: List[Model] = [
         capabilities=Capability.VIDEO_GENERATION,
         display_name="Seedance 1 Lite",
     ),
+    # Replicate Image Generation Models
+    Model(
+        id="stability-ai/sdxl",
+        provider=Provider.REPLICATE,
+        capabilities=Capability.IMAGE_GENERATION,
+        display_name="Stable Diffusion XL",
+    ),
+    Model(
+        id="stability-ai/stable-diffusion",
+        provider=Provider.REPLICATE,
+        capabilities=Capability.IMAGE_GENERATION,
+        display_name="Stable Diffusion",
+    ),
+    Model(
+        id="black-forest-labs/flux-schnell",
+        provider=Provider.REPLICATE,
+        capabilities=Capability.IMAGE_GENERATION,
+        display_name="FLUX Schnell",
+    ),
+    Model(
+        id="black-forest-labs/flux-dev",
+        provider=Provider.REPLICATE,
+        capabilities=Capability.IMAGE_GENERATION,
+        display_name="FLUX Dev",
+    ),
+    Model(
+        id="black-forest-labs/flux-pro",
+        provider=Provider.REPLICATE,
+        capabilities=Capability.IMAGE_GENERATION,
+        display_name="FLUX Pro",
+    ),
     # Audio transcription
     Model(
         id="gpt-4o-transcribe",

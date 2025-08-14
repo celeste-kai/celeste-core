@@ -65,7 +65,8 @@ Check capability support on a model:
 from celeste_core.models.registry import supports
 from celeste_core.enums.capability import Capability
 
-assert supports("gemini-2.5-flash", Capability.TEXT_GENERATION)
+from celeste_core.enums.providers import Provider
+assert supports(Provider.GOOGLE, "gemini-2.5-flash", Capability.TEXT_GENERATION)
 ```
 
 ## 📦 Installation
@@ -99,7 +100,7 @@ No configuration is required for `celeste-core` itself. Provider API keys are co
 Key functions from `celeste_core.models.registry`:
 - `list_models(provider: Optional[Provider] = None, capability: Optional[Capability] = None) -> list[Model]`
 - `get_model(model_id: str) -> Model | None`
-- `supports(model_id: str, cap: Capability) -> bool`
+- `supports(provider: Provider, model_id: str, cap: Capability) -> bool`
 - `reload_catalog() -> None` (re-seeds the registry from the Python `CATALOG`)
 
 The registry is automatically loaded at import time from the Python catalog.
