@@ -1,22 +1,22 @@
 from __future__ import annotations
 
 from abc import ABC, abstractmethod
-from typing import Any, AsyncIterator
+from typing import Any
 
 from celeste_core.enums.capability import Capability
 from celeste_core.enums.providers import Provider
 from celeste_core.models.registry import supports
 
 
-class BaseAudioClient(ABC):
+class BaseVideoClient(ABC):
     def __init__(
         self,
         model: str,
-        capability: Capability = Capability.AUDIO_TRANSCRIPTION,
+        capability: Capability = Capability.VIDEO_GENERATION,
         provider: Provider | None = None,
         **kwargs: Any,
     ) -> None:
-        """Initialize audio client with validation logic."""
+        """Initialize provider client with validation for video capability."""
         self.model_name = model
         if provider is None:
             raise ValueError("provider is required for capability validation")
@@ -27,15 +27,6 @@ class BaseAudioClient(ABC):
             )
 
     @abstractmethod
-    async def generate_content(
-        self, prompt: str, audio_file: Any, **kwargs: Any
-    ) -> Any:
-        """Generate a single response from a prompt and an audio input."""
-        raise NotImplementedError
-
-    @abstractmethod
-    async def stream_generate_content(
-        self, prompt: str, audio_file: Any, **kwargs: Any
-    ) -> AsyncIterator[Any]:
-        """Stream the response chunk by chunk."""
+    async def generate_content(self, prompt: str, **kwargs: Any) -> Any:
+        """Generate a video from a prompt and return domain-specific response."""
         raise NotImplementedError

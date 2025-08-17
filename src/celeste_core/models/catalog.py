@@ -458,12 +458,6 @@ CATALOG: List[Model] = [
         display_name="DeepSeek R1",
     ),
     Model(
-        id="openai/gpt-oss-20b",
-        provider=Provider.TRANSFORMERS,
-        capabilities=Capability.TEXT_GENERATION,
-        display_name="GPT OSS 20B",
-    ),
-    Model(
         id="Qwen/Qwen3-0.6B",
         provider=Provider.TRANSFORMERS,
         capabilities=Capability.TEXT_GENERATION,
@@ -504,6 +498,12 @@ CATALOG: List[Model] = [
         provider=Provider.OLLAMA,
         capabilities=Capability.TEXT_GENERATION,
         display_name="Granite 3.2",
+    ),
+    Model(
+        id="gpt-oss:20b",
+        provider=Provider.OLLAMA,
+        capabilities=Capability.TEXT_GENERATION,
+        display_name="GPT OSS 20B (Ollama)",
     ),
 ]
 

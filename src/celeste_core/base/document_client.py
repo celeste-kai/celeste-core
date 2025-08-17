@@ -37,6 +37,3 @@ class BaseDocClient(ABC):
     ) -> AsyncIterator[Any]:
         """Stream the response chunk by chunk."""
         raise NotImplementedError
-
-
-__all__ = ["BaseDocClient"]
