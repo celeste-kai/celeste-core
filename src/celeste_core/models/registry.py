@@ -35,6 +35,23 @@ def list_models(
     return list(models)
 
 
+def list_providers(*, capability: Optional[Capability] = None) -> List[Provider]:
+    """Return distinct providers, optionally filtered by capability support.
+
+    When capability is provided, only providers that have at least one model
+    supporting the capability are returned.
+    """
+    if capability is None:
+        return sorted(
+            {provider for (provider, _model_id) in MODEL_REGISTRY.keys()},
+            key=lambda p: p.value,
+        )
+
+    supported_models = list_models(capability=capability)
+    providers = {m.provider for m in supported_models}
+    return sorted(providers, key=lambda p: p.value)
+
+
 def supports(provider: Provider, model_id: str, cap: Capability) -> bool:
     model = get_model(provider, model_id)
     return bool(model and model.supports(cap))
@@ -58,6 +75,7 @@ __all__ = [
     "MODEL_REGISTRY",
     "get_model",
     "list_models",
+    "list_providers",
     "supports",
     "register_model",
     "clear_registry",
