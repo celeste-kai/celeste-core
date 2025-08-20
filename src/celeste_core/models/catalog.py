@@ -211,28 +211,10 @@ CATALOG: List[Model] = [
     ),
     # Local image models
     Model(
-        id="black-forest-labs/FLUX.1-schnell",
-        provider=Provider.LOCAL,
-        capabilities=Capability.IMAGE_GENERATION,
-        display_name="FLUX.1 Schnell",
-    ),
-    Model(
-        id="black-forest-labs/FLUX.1-dev",
-        provider=Provider.LOCAL,
-        capabilities=Capability.IMAGE_GENERATION,
-        display_name="FLUX.1 Dev",
-    ),
-    Model(
         id="stabilityai/sdxl-turbo",
         provider=Provider.LOCAL,
         capabilities=Capability.IMAGE_GENERATION,
         display_name="SDXL Turbo",
-    ),
-    Model(
-        id="ByteDance/SDXL-Lightning",
-        provider=Provider.LOCAL,
-        capabilities=Capability.IMAGE_GENERATION,
-        display_name="SDXL Lightning",
     ),
     Model(
         id="stabilityai/stable-diffusion-xl-base-1.0",
