@@ -298,12 +298,38 @@ CATALOG: List[Model] = [
         capabilities=Capability.VIDEO_GENERATION,
         display_name="Seedance 1 Lite",
     ),
+    # Video generation (Google)
+    Model(
+        id="veo-3.0-generate-preview",
+        provider=Provider.GOOGLE,
+        capabilities=Capability.VIDEO_GENERATION,
+        display_name="Veo 3.0 Preview",
+    ),
+    Model(
+        id="veo-3.0-fast-generate-preview",
+        provider=Provider.GOOGLE,
+        capabilities=Capability.VIDEO_GENERATION,
+        display_name="Veo 3.0 Fast Preview",
+    ),
+    Model(
+        id="veo-2.0-generate-001",
+        provider=Provider.GOOGLE,
+        capabilities=Capability.VIDEO_GENERATION,
+        display_name="Veo 2.0",
+    ),
     # Replicate Image Generation Models
     Model(
         id="stability-ai/sdxl",
         provider=Provider.REPLICATE,
         capabilities=Capability.IMAGE_GENERATION,
         display_name="Stable Diffusion XL",
+    ),
+    # Replicate Image Edit Models
+    Model(
+        id="qwen/qwen-image-edit",
+        provider=Provider.REPLICATE,
+        capabilities=Capability.IMAGE_EDIT,
+        display_name="Qwen Image Edit",
     ),
     Model(
         id="stability-ai/stable-diffusion",
