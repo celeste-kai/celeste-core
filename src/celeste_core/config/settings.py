@@ -82,6 +82,7 @@ class CelesteSettings(BaseSettings):
         env_file_encoding="utf-8",
         populate_by_name=True,
         env_nested_delimiter="__",
+        extra="ignore",
     )
     openai: OpenAISettings = Field(default_factory=OpenAISettings)
     google: GoogleSettings = Field(default_factory=GoogleSettings)
