@@ -40,7 +40,8 @@ CATALOG: List[Model] = [
         provider=Provider.GOOGLE,
         capabilities=Capability.TEXT_GENERATION
         | Capability.STRUCTURED_OUTPUT
-        | Capability.VISION,
+        | Capability.VISION
+        | Capability.DOCUMENT_INTELLIGENCE,
         display_name="Gemini 2.5 Flash",
     ),
     Model(
@@ -48,7 +49,8 @@ CATALOG: List[Model] = [
         provider=Provider.GOOGLE,
         capabilities=Capability.TEXT_GENERATION
         | Capability.STRUCTURED_OUTPUT
-        | Capability.VISION,
+        | Capability.VISION
+        | Capability.DOCUMENT_INTELLIGENCE,
         display_name="Gemini 2.5 Pro",
     ),
     Model(
@@ -57,7 +59,8 @@ CATALOG: List[Model] = [
         capabilities=Capability.TEXT_GENERATION
         | Capability.STRUCTURED_OUTPUT
         | Capability.VISION
-        | Capability.AUDIO_TRANSCRIPTION,
+        | Capability.AUDIO_TRANSCRIPTION
+        | Capability.DOCUMENT_INTELLIGENCE,
         display_name="Gemini 2.5 Flash Lite",
     ),
     Model(
