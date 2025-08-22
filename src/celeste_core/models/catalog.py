@@ -513,6 +513,31 @@ CATALOG: List[Model] = [
         capabilities=Capability.TEXT_GENERATION,
         display_name="GPT OSS 20B (Ollama)",
     ),
+    # Cohere reranking models
+    Model(
+        id="rerank-multilingual-v3.0",
+        provider=Provider.COHERE,
+        capabilities=Capability.RERANKING,
+        display_name="Rerank Multilingual v3.0",
+    ),
+    Model(
+        id="rerank-english-v3.0",
+        provider=Provider.COHERE,
+        capabilities=Capability.RERANKING,
+        display_name="Rerank English v3.0",
+    ),
+    Model(
+        id="rerank-multilingual-v2.0",
+        provider=Provider.COHERE,
+        capabilities=Capability.RERANKING,
+        display_name="Rerank Multilingual v2.0",
+    ),
+    Model(
+        id="rerank-english-v2.0",
+        provider=Provider.COHERE,
+        capabilities=Capability.RERANKING,
+        display_name="Rerank English v2.0",
+    ),
 ]
 
 

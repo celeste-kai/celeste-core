@@ -76,6 +76,12 @@ class ReplicateSettings(BaseModel):
     )
 
 
+class CohereSettings(BaseModel):
+    api_key: Optional[str] = Field(
+        default_factory=lambda: os.getenv("COHERE_API_KEY"), alias="COHERE_API_KEY"
+    )
+
+
 class CelesteSettings(BaseSettings):
     model_config = SettingsConfigDict(
         env_file=".env",
@@ -93,6 +99,7 @@ class CelesteSettings(BaseSettings):
     luma: LumaSettings = Field(default_factory=LumaSettings)
     xai: XAISettings = Field(default_factory=XAISettings)
     replicate: ReplicateSettings = Field(default_factory=ReplicateSettings)
+    cohere: CohereSettings = Field(default_factory=CohereSettings)
 
     # Pydantic v2 SettingsConfigDict above replaces old Config
 
@@ -121,6 +128,8 @@ class CelesteSettings(BaseSettings):
             missing.append("XAI_API_KEY")
         if p == "replicate" and not self.replicate.api_token:
             missing.append("REPLICATE_API_TOKEN")
+        if p == "cohere" and not self.cohere.api_key:
+            missing.append("COHERE_API_KEY")
 
         if missing:
             raise ValueError(
@@ -145,6 +154,7 @@ class CelesteSettings(BaseSettings):
             "luma": {"api_key": mask(self.luma.api_key)},
             "xai": {"api_key": mask(self.xai.api_key)},
             "replicate": {"api_token": mask(self.replicate.api_token)},
+            "cohere": {"api_key": mask(self.cohere.api_key)},
         }
 
 

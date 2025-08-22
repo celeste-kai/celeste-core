@@ -14,3 +14,4 @@ class Provider(Enum):
     LUMA = "luma"
     XAI = "xai"
     REPLICATE = "replicate"
+    COHERE = "cohere"
