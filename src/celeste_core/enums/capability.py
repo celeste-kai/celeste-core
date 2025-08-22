@@ -20,6 +20,7 @@ class Capability(IntFlag):
     STRUCTURED_OUTPUT = 1 << 8
     FUNCTION_CALLING = 1 << 9
     VISION = 1 << 10
+    RERANKING = 1 << 11
 
 
 __all__ = ["Capability"]
