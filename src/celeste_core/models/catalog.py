@@ -518,6 +518,12 @@ CATALOG: List[Model] = [
     ),
     # Cohere reranking models
     Model(
+        id="rerank-v3.5",
+        provider=Provider.COHERE,
+        capabilities=Capability.RERANKING,
+        display_name="Rerank v3.5",
+    ),
+    Model(
         id="rerank-multilingual-v3.0",
         provider=Provider.COHERE,
         capabilities=Capability.RERANKING,
@@ -528,18 +534,6 @@ CATALOG: List[Model] = [
         provider=Provider.COHERE,
         capabilities=Capability.RERANKING,
         display_name="Rerank English v3.0",
-    ),
-    Model(
-        id="rerank-multilingual-v2.0",
-        provider=Provider.COHERE,
-        capabilities=Capability.RERANKING,
-        display_name="Rerank Multilingual v2.0",
-    ),
-    Model(
-        id="rerank-english-v2.0",
-        provider=Provider.COHERE,
-        capabilities=Capability.RERANKING,
-        display_name="Rerank English v2.0",
     ),
 ]
 
