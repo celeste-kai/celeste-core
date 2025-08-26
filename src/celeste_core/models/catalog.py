@@ -233,6 +233,12 @@ CATALOG: List[Model] = [
     ),
     # Image edit
     Model(
+        id="gemini-2.5-flash-image-preview",
+        provider=Provider.GOOGLE,
+        capabilities=Capability.IMAGE_EDIT,
+        display_name="Gemini 2.5 Flash Image Preview",
+    ),
+    Model(
         id="gemini-2.0-flash-preview-image-generation",
         provider=Provider.GOOGLE,
         capabilities=Capability.IMAGE_EDIT,
