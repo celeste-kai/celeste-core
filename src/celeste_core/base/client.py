@@ -5,26 +5,19 @@ from typing import Any, AsyncIterator
 
 from celeste_core.enums.capability import Capability
 from celeste_core.enums.providers import Provider
-from celeste_core.models.registry import supports
+from celeste_core.validation import validate_client_config
 
 
 class BaseClient(ABC):
     def __init__(
         self,
         model: str,
-        capability: Capability = Capability.TEXT_GENERATION,
         provider: Provider | None = None,
         **kwargs: Any,
     ) -> None:
-        """Initialize provider client with common validation logic."""
+        """Initialize text generation client with validation logic."""
+        validate_client_config(model, provider, Capability.TEXT_GENERATION)
         self.model_name = model
-        if provider is None:
-            raise ValueError("provider is required for capability validation")
-        if not supports(provider, self.model_name, capability):
-            raise ValueError(
-                f"Model '{self.model_name}' does not support {capability} "
-                f"for provider {provider.value}"
-            )
 
     @abstractmethod
     async def generate_content(

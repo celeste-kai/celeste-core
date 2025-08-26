@@ -15,3 +15,4 @@ class Provider(Enum):
     XAI = "xai"
     REPLICATE = "replicate"
     COHERE = "cohere"
+    TOPAZLABS = "topazlabs"

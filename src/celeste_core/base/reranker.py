@@ -3,14 +3,19 @@ from __future__ import annotations
 from abc import ABC, abstractmethod
 from typing import Any, List, Union
 
+from celeste_core.enums.capability import Capability
+from celeste_core.enums.providers import Provider
 from celeste_core.types.response import AIResponse
+from celeste_core.validation import validate_client_config
 
 
 class BaseReranker(ABC):
-    @abstractmethod
-    def __init__(self, **kwargs: Any) -> None:  # pragma: no cover - interface only
-        """Initialize provider reranker; provider-specific args via kwargs."""
-        raise NotImplementedError
+    def __init__(
+        self, model: str, provider: Provider | None = None, **kwargs: Any
+    ) -> None:
+        """Initialize reranker with validation logic."""
+        validate_client_config(model, provider, Capability.RERANKING)
+        self.model_name = model
 
     @abstractmethod
     async def rerank(

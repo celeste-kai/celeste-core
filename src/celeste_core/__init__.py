@@ -1,5 +1,7 @@
 """Celeste Core: shared config, enums, base classes, and types."""
 
+from .base.image_enhancer import BaseImageEnhancer
+from .base.tts_client import BaseTTSClient
 from .enums.capability import Capability
 from .enums.providers import Provider
 from .models.model import Model
@@ -12,6 +14,7 @@ from .models.registry import (
     reload_catalog,
     supports,
 )
+from .types.audio import AudioArtifact
 from .types.image import ImageArtifact
 from .types.response import AIResponse
 from .types.video import VideoArtifact
@@ -20,6 +23,7 @@ __all__ = [
     "Provider",
     "Capability",
     "AIResponse",
+    "AudioArtifact",
     "ImageArtifact",
     "VideoArtifact",
     "Model",
@@ -30,4 +34,6 @@ __all__ = [
     "register_model",
     "clear_registry",
     "reload_catalog",
+    "BaseImageEnhancer",
+    "BaseTTSClient",
 ]

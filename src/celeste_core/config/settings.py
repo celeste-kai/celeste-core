@@ -82,6 +82,13 @@ class CohereSettings(BaseModel):
     )
 
 
+class TopazLabsSettings(BaseModel):
+    api_key: Optional[str] = Field(
+        default_factory=lambda: os.getenv("TOPAZLABS_API_KEY"),
+        alias="TOPAZLABS_API_KEY",
+    )
+
+
 class CelesteSettings(BaseSettings):
     model_config = SettingsConfigDict(
         env_file=".env",
@@ -101,6 +108,7 @@ class CelesteSettings(BaseSettings):
     xai: XAISettings = Field(default_factory=XAISettings)
     replicate: ReplicateSettings = Field(default_factory=ReplicateSettings)
     cohere: CohereSettings = Field(default_factory=CohereSettings)
+    topazlabs: TopazLabsSettings = Field(default_factory=TopazLabsSettings)
 
     # Pydantic v2 SettingsConfigDict above replaces old Config
 
@@ -131,6 +139,8 @@ class CelesteSettings(BaseSettings):
             missing.append("REPLICATE_API_TOKEN")
         if p == "cohere" and not self.cohere.api_key:
             missing.append("COHERE_API_KEY")
+        if p == "topazlabs" and not self.topazlabs.api_key:
+            missing.append("TOPAZLABS_API_KEY")
 
         if missing:
             raise ValueError(
@@ -156,6 +166,7 @@ class CelesteSettings(BaseSettings):
             "xai": {"api_key": mask(self.xai.api_key)},
             "replicate": {"api_token": mask(self.replicate.api_token)},
             "cohere": {"api_key": mask(self.cohere.api_key)},
+            "topazlabs": {"api_key": mask(self.topazlabs.api_key)},
         }
 
 
