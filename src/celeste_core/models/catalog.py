@@ -535,6 +535,44 @@ CATALOG: List[Model] = [
         capabilities=Capability.RERANKING,
         display_name="Rerank English v3.0",
     ),
+    # Google Text-to-Speech models
+    Model(
+        id="gemini-2.5-flash-preview-tts",
+        provider=Provider.GOOGLE,
+        capabilities=Capability.TEXT_TO_SPEECH,
+        display_name="Gemini 2.5 Flash TTS Preview",
+    ),
+    # Topaz Labs image enhancement models
+    Model(
+        id="Standard V2",
+        provider=Provider.TOPAZLABS,
+        capabilities=Capability.IMAGE_ENHANCE,
+        display_name="Standard V2",
+    ),
+    Model(
+        id="Low Resolution V2",
+        provider=Provider.TOPAZLABS,
+        capabilities=Capability.IMAGE_ENHANCE,
+        display_name="Low Resolution V2",
+    ),
+    Model(
+        id="CGI",
+        provider=Provider.TOPAZLABS,
+        capabilities=Capability.IMAGE_ENHANCE,
+        display_name="CGI",
+    ),
+    Model(
+        id="High Fidelity V2",
+        provider=Provider.TOPAZLABS,
+        capabilities=Capability.IMAGE_ENHANCE,
+        display_name="High Fidelity V2",
+    ),
+    Model(
+        id="Text Refine",
+        provider=Provider.TOPAZLABS,
+        capabilities=Capability.IMAGE_ENHANCE,
+        display_name="Text Refine",
+    ),
 ]
 
 

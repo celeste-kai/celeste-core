@@ -5,26 +5,19 @@ from typing import Any, AsyncIterator
 
 from celeste_core.enums.capability import Capability
 from celeste_core.enums.providers import Provider
-from celeste_core.models.registry import supports
+from celeste_core.validation import validate_client_config
 
 
 class BaseAudioClient(ABC):
     def __init__(
         self,
         model: str,
-        capability: Capability = Capability.AUDIO_TRANSCRIPTION,
         provider: Provider | None = None,
         **kwargs: Any,
     ) -> None:
-        """Initialize audio client with validation logic."""
+        """Initialize audio transcription client with validation logic."""
+        validate_client_config(model, provider, Capability.AUDIO_TRANSCRIPTION)
         self.model_name = model
-        if provider is None:
-            raise ValueError("provider is required for capability validation")
-        if not supports(provider, self.model_name, capability):
-            raise ValueError(
-                f"Model '{self.model_name}' does not support {capability} "
-                f"for provider {provider.value}"
-            )
 
     @abstractmethod
     async def generate_content(

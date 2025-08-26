@@ -9,17 +9,15 @@ from celeste_core.types.image import ImageArtifact
 from celeste_core.validation import validate_client_config
 
 
-class BaseImageEditor(ABC):
+class BaseImageEnhancer(ABC):
     def __init__(
         self, model: str, provider: Provider | None = None, **kwargs: Any
     ) -> None:
-        """Initialize image editor with validation logic."""
-        validate_client_config(model, provider, Capability.IMAGE_EDIT)
+        """Initialize image enhancer with validation logic."""
+        validate_client_config(model, provider, Capability.IMAGE_ENHANCE)
         self.model_name = model
 
     @abstractmethod
-    async def edit_image(
-        self, prompt: str, image: ImageArtifact, **kwargs: Any
-    ) -> ImageArtifact:
-        """Submit a request to start an image editing job."""
+    async def enhance_image(self, image: ImageArtifact, **kwargs: Any) -> ImageArtifact:
+        """Submit a request to enhance an image."""
         raise NotImplementedError

@@ -21,6 +21,8 @@ class Capability(IntFlag):
     FUNCTION_CALLING = 1 << 9
     VISION = 1 << 10
     RERANKING = 1 << 11
+    IMAGE_ENHANCE = 1 << 12
+    TEXT_TO_SPEECH = 1 << 13
 
 
 __all__ = ["Capability"]
