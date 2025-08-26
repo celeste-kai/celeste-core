@@ -15,7 +15,7 @@ class BaseImageEditor(ABC):
     ) -> None:
         """Initialize image editor with validation logic."""
         validate_client_config(model, provider, Capability.IMAGE_EDIT)
-        self.model_name = model
+        self.model = model
 
     @abstractmethod
     async def edit_image(

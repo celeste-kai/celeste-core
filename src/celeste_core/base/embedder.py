@@ -15,7 +15,7 @@ class BaseEmbedder(ABC):
     ) -> None:
         """Initialize embedder with validation logic."""
         validate_client_config(model, provider, Capability.EMBEDDINGS)
-        self.model_name = model
+        self.model = model
 
     @abstractmethod
     async def generate_embeddings(

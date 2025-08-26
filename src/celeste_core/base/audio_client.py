@@ -17,7 +17,7 @@ class BaseAudioClient(ABC):
     ) -> None:
         """Initialize audio transcription client with validation logic."""
         validate_client_config(model, provider, Capability.AUDIO_TRANSCRIPTION)
-        self.model_name = model
+        self.model = model
 
     @abstractmethod
     async def generate_content(

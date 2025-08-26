@@ -15,7 +15,7 @@ class BaseTTSClient(ABC):
     ) -> None:
         """Initialize TTS client with validation logic."""
         validate_client_config(model, provider, Capability.TEXT_TO_SPEECH)
-        self.model_name = model
+        self.model = model
 
     @abstractmethod
     async def generate_speech(

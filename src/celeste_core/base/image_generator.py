@@ -15,7 +15,7 @@ class BaseImageGenerator(ABC):
     ) -> None:
         """Initialize image generator with validation logic."""
         validate_client_config(model, provider, Capability.IMAGE_GENERATION)
-        self.model_name = model
+        self.model = model
 
     @abstractmethod
     async def generate_image(self, prompt: str, **kwargs: Any) -> List[ImageArtifact]:

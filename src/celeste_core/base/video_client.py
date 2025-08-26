@@ -17,7 +17,7 @@ class BaseVideoClient(ABC):
     ) -> None:
         """Initialize video generation client with validation logic."""
         validate_client_config(model, provider, Capability.VIDEO_GENERATION)
-        self.model_name = model
+        self.model = model
 
     @abstractmethod
     async def generate_content(self, prompt: str, **kwargs: Any) -> Any:
