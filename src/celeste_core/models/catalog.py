@@ -114,7 +114,7 @@ CATALOG: List[Model] = [
     ),
     # xAI
     Model(
-        id="grok-2-image",
+        id="grok-2-image-1212",
         provider=Provider.XAI,
         capabilities=Capability.IMAGE_GENERATION,
         display_name="Grok-2 Image",
