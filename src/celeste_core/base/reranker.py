@@ -15,7 +15,7 @@ class BaseReranker(ABC):
     ) -> None:
         """Initialize reranker with validation logic."""
         validate_client_config(model, provider, Capability.RERANKING)
-        self.model_name = model
+        self.model = model
 
     @abstractmethod
     async def rerank(

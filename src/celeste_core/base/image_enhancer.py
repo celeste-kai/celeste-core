@@ -15,7 +15,7 @@ class BaseImageEnhancer(ABC):
     ) -> None:
         """Initialize image enhancer with validation logic."""
         validate_client_config(model, provider, Capability.IMAGE_ENHANCE)
-        self.model_name = model
+        self.model = model
 
     @abstractmethod
     async def enhance_image(self, image: ImageArtifact, **kwargs: Any) -> ImageArtifact:

@@ -17,7 +17,7 @@ class BaseDocClient(ABC):
     ) -> None:
         """Initialize document intelligence client with validation logic."""
         validate_client_config(model, provider, Capability.DOCUMENT_INTELLIGENCE)
-        self.model_name = model
+        self.model = model
 
     @abstractmethod
     async def generate_content(self, prompt: str, documents: Any, **kwargs: Any) -> Any:

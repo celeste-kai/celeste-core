@@ -17,7 +17,7 @@ class BaseClient(ABC):
     ) -> None:
         """Initialize text generation client with validation logic."""
         validate_client_config(model, provider, Capability.TEXT_GENERATION)
-        self.model_name = model
+        self.model = model
 
     @abstractmethod
     async def generate_content(
