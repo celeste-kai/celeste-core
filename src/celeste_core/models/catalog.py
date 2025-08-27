@@ -82,6 +82,12 @@ CATALOG: List[Model] = [
         display_name="Imagen 4 Ultra (preview)",
     ),
     Model(
+        id="gemini-2.5-flash-image-preview",
+        provider=Provider.GOOGLE,
+        capabilities=Capability.IMAGE_GENERATION,
+        display_name="Gemini 2.5 Flash (Image Preview)",
+    ),
+    Model(
         id="gemini-embedding-exp-03-07",
         provider=Provider.GOOGLE,
         capabilities=Capability.EMBEDDINGS,
