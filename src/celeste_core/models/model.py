@@ -1,10 +1,9 @@
 from __future__ import annotations
 
-from typing import List, Optional
+from pydantic import BaseModel, field_serializer
 
 from celeste_core.enums.capability import Capability
 from celeste_core.enums.providers import Provider
-from pydantic import BaseModel, field_serializer
 
 
 class Model(BaseModel):
@@ -16,7 +15,7 @@ class Model(BaseModel):
     id: str
     provider: Provider
     capabilities: Capability = Capability.NONE
-    display_name: Optional[str] = None
+    display_name: str | None = None
 
     def supports(self, cap: Capability) -> bool:
         return bool(self.capabilities & cap)
@@ -25,7 +24,7 @@ class Model(BaseModel):
         return (self.capabilities & caps) == caps
 
     @field_serializer("capabilities")
-    def _serialize_capabilities(self, cap: Capability) -> List[str]:
+    def _serialize_capabilities(self, cap: Capability) -> list[str]:
         return [c.name for c in Capability if c and (c & cap)]
 
 

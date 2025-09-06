@@ -1,14 +1,12 @@
 from __future__ import annotations
 
-from typing import List
-
 from celeste_core.enums.capability import Capability
 from celeste_core.enums.providers import Provider
 from celeste_core.models.model import Model
 
 # Define models explicitly to keep per-model capabilities easy to tweak.
 # Contributors can edit this list to add/update models.
-CATALOG: List[Model] = [
+CATALOG: list[Model] = [
     # OpenAI
     Model(
         id="dall-e-3",
@@ -41,6 +39,7 @@ CATALOG: List[Model] = [
         capabilities=Capability.TEXT_GENERATION
         | Capability.STRUCTURED_OUTPUT
         | Capability.VISION
+        | Capability.AUDIO_TRANSCRIPTION
         | Capability.DOCUMENT_INTELLIGENCE,
         display_name="Gemini 2.5 Flash",
     ),
@@ -50,6 +49,7 @@ CATALOG: List[Model] = [
         capabilities=Capability.TEXT_GENERATION
         | Capability.STRUCTURED_OUTPUT
         | Capability.VISION
+        | Capability.AUDIO_TRANSCRIPTION
         | Capability.DOCUMENT_INTELLIGENCE,
         display_name="Gemini 2.5 Pro",
     ),

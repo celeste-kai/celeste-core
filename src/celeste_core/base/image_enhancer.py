@@ -10,9 +10,7 @@ from celeste_core.validation import validate_client_config
 
 
 class BaseImageEnhancer(ABC):
-    def __init__(
-        self, model: str, provider: Provider | None = None, **kwargs: Any
-    ) -> None:
+    def __init__(self, model: str, provider: Provider | None = None, **kwargs: Any) -> None:  # noqa: ARG002
         """Initialize image enhancer with validation logic."""
         validate_client_config(model, provider, Capability.IMAGE_ENHANCE)
         self.model = model

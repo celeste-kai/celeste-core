@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 import os
-from typing import Optional
 
 from dotenv import load_dotenv
 from pydantic import BaseModel, Field
@@ -12,78 +11,66 @@ load_dotenv()
 
 
 class OpenAISettings(BaseModel):
-    api_key: Optional[str] = Field(
-        default_factory=lambda: os.getenv("OPENAI_API_KEY"), alias="OPENAI_API_KEY"
-    )
+    api_key: str | None = Field(default_factory=lambda: os.getenv("OPENAI_API_KEY"), alias="OPENAI_API_KEY")
 
 
 class GoogleSettings(BaseModel):
-    api_key: Optional[str] = Field(
-        default_factory=lambda: os.getenv("GOOGLE_API_KEY"), alias="GOOGLE_API_KEY"
-    )
+    api_key: str | None = Field(default_factory=lambda: os.getenv("GOOGLE_API_KEY"), alias="GOOGLE_API_KEY")
 
 
 class AnthropicSettings(BaseModel):
-    api_key: Optional[str] = Field(
+    api_key: str | None = Field(
         default_factory=lambda: os.getenv("ANTHROPIC_API_KEY"),
         alias="ANTHROPIC_API_KEY",
     )
 
 
 class MistralSettings(BaseModel):
-    api_key: Optional[str] = Field(
-        default_factory=lambda: os.getenv("MISTRAL_API_KEY"), alias="MISTRAL_API_KEY"
-    )
+    api_key: str | None = Field(default_factory=lambda: os.getenv("MISTRAL_API_KEY"), alias="MISTRAL_API_KEY")
 
 
 class HuggingFaceSettings(BaseModel):
-    access_token: Optional[str] = Field(
+    access_token: str | None = Field(
         default_factory=lambda: os.getenv("HUGGINGFACE_TOKEN"),
         alias="HUGGINGFACE_TOKEN",
     )
 
 
 class OllamaSettings(BaseModel):
-    host: Optional[str] = Field(
+    host: str | None = Field(
         default_factory=lambda: os.getenv("OLLAMA_HOST", "http://localhost:11434"),
         alias="OLLAMA_HOST",
     )
 
 
 class StabilitySettings(BaseModel):
-    api_key: Optional[str] = Field(
+    api_key: str | None = Field(
         default_factory=lambda: os.getenv("STABILITYAI_API_KEY"),
         alias="STABILITYAI_API_KEY",
     )
 
 
 class LumaSettings(BaseModel):
-    api_key: Optional[str] = Field(
-        default_factory=lambda: os.getenv("LUMA_API_KEY"), alias="LUMA_API_KEY"
-    )
+    api_key: str | None = Field(default_factory=lambda: os.getenv("LUMA_API_KEY"), alias="LUMA_API_KEY")
 
 
 class XAISettings(BaseModel):
-    api_key: Optional[str] = Field(
-        default_factory=lambda: os.getenv("XAI_API_KEY"), alias="XAI_API_KEY"
-    )
+    api_key: str | None = Field(default_factory=lambda: os.getenv("XAI_API_KEY"), alias="XAI_API_KEY")
 
 
 class ReplicateSettings(BaseModel):
-    api_token: Optional[str] = Field(
+    api_token: str | None = Field(
         default_factory=lambda: os.getenv("REPLICATE_API_TOKEN"),
         alias="REPLICATE_API_TOKEN",
     )
 
 
 class CohereSettings(BaseModel):
-    api_key: Optional[str] = Field(
-        default_factory=lambda: os.getenv("COHERE_API_KEY"), alias="COHERE_API_KEY"
-    )
+    api_key: str | None = Field(default_factory=lambda: os.getenv("COHERE_API_KEY"), alias="COHERE_API_KEY")
 
 
 class TopazLabsSettings(BaseModel):
-    api_key: Optional[str] = Field(
+    api_key: str | None = Field(
         default_factory=lambda: os.getenv("TOPAZLABS_API_KEY"),
         alias="TOPAZLABS_API_KEY",
     )
@@ -112,44 +99,34 @@ class CelesteSettings(BaseSettings):
 
     # Pydantic v2 SettingsConfigDict above replaces old Config
 
+    def _get_credential_for_provider(self, provider: str) -> tuple[str | None, str]:
+        """Get credential value and env var name for a provider."""
+        provider_map = {
+            "openai": (self.openai.api_key, "OPENAI_API_KEY"),
+            "anthropic": (self.anthropic.api_key, "ANTHROPIC_API_KEY"),
+            "mistral": (self.mistral.api_key, "MISTRAL_API_KEY"),
+            "google": (self.google.api_key, "GOOGLE_API_KEY"),
+            "huggingface": (self.huggingface.access_token, "HUGGINGFACE_TOKEN"),
+            "stabilityai": (self.stability.api_key, "STABILITYAI_API_KEY"),
+            "luma": (self.luma.api_key, "LUMA_API_KEY"),
+            "xai": (self.xai.api_key, "XAI_API_KEY"),
+            "replicate": (self.replicate.api_token, "REPLICATE_API_TOKEN"),
+            "cohere": (self.cohere.api_key, "COHERE_API_KEY"),
+            "topazlabs": (self.topazlabs.api_key, "TOPAZLABS_API_KEY"),
+        }
+        return provider_map.get(provider.lower(), (None, ""))
+
     def validate_for_provider(self, provider: str) -> None:
         """
         Validate that required credentials are present for the selected provider.
         Raises ValueError with a helpful message when missing.
         """
-        missing: list[str] = []
-        p = provider.lower()
-        if p == "openai" and not self.openai.api_key:
-            missing.append("OPENAI_API_KEY")
-        if p == "anthropic" and not self.anthropic.api_key:
-            missing.append("ANTHROPIC_API_KEY")
-        if p == "mistral" and not self.mistral.api_key:
-            missing.append("MISTRAL_API_KEY")
-        if p == "google" and not self.google.api_key:
-            missing.append("GOOGLE_API_KEY")
-        if p == "huggingface" and not self.huggingface.access_token:
-            missing.append("HUGGINGFACE_TOKEN")
-        if p == "stabilityai" and not self.stability.api_key:
-            missing.append("STABILITYAI_API_KEY")
-        if p == "luma" and not self.luma.api_key:
-            missing.append("LUMA_API_KEY")
-        if p == "xai" and not self.xai.api_key:
-            missing.append("XAI_API_KEY")
-        if p == "replicate" and not self.replicate.api_token:
-            missing.append("REPLICATE_API_TOKEN")
-        if p == "cohere" and not self.cohere.api_key:
-            missing.append("COHERE_API_KEY")
-        if p == "topazlabs" and not self.topazlabs.api_key:
-            missing.append("TOPAZLABS_API_KEY")
-
-        if missing:
-            raise ValueError(
-                f"Missing required environment variables for provider "
-                f"'{provider}': {', '.join(missing)}"
-            )
+        credential, env_var = self._get_credential_for_provider(provider)
+        if env_var and not credential:
+            raise ValueError(f"Missing required environment variable for provider '{provider}': {env_var}")
 
     def dump_masked(self) -> dict:
-        def mask(value: Optional[str]) -> Optional[str]:
+        def mask(value: str | None) -> str | None:
             if not value:
                 return value
             return value[:3] + "***" if len(value) > 3 else "***"
