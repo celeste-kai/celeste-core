@@ -1,15 +1,13 @@
 from __future__ import annotations
 
-from typing import Any, Generic, TypeVar
+from typing import Any
 
 from pydantic import BaseModel, ConfigDict, Field
 
 from celeste_core.enums.providers import Provider
 
-T = TypeVar("T")
 
-
-class AIResponse(BaseModel, Generic[T]):
+class AIResponse[T](BaseModel):
     """Generic AI response wrapper used across domains.
 
     The content type parameter T allows domains to specify their payloads:
