@@ -62,7 +62,7 @@ def supports(provider: Provider, model_id: str, cap: Capability) -> bool:
 
 def reload_catalog() -> None:
     """Reload the built-in Python catalog into the registry."""
-    from celeste_core.models.catalog import CATALOG
+    from celeste_core.models.catalog import CATALOG  # noqa: PLC0415
 
     clear_registry()
     for model in CATALOG:
