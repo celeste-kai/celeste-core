@@ -1,13 +1,13 @@
 from __future__ import annotations
 
-from typing import Dict, Iterable, List, Optional, Tuple
+from collections.abc import Iterable
 
 from celeste_core.enums.capability import Capability
 from celeste_core.enums.providers import Provider
 from celeste_core.models.model import Model
 
 # Central registry mapping (provider, model_id) to metadata.
-MODEL_REGISTRY: Dict[Tuple[Provider, str], Model] = {}
+MODEL_REGISTRY: dict[tuple[Provider, str], Model] = {}
 
 
 def register_model(model: Model) -> None:
@@ -20,13 +20,11 @@ def clear_registry() -> None:
     MODEL_REGISTRY.clear()
 
 
-def get_model(provider: Provider, model_id: str) -> Optional[Model]:
+def get_model(provider: Provider, model_id: str) -> Model | None:
     return MODEL_REGISTRY.get((provider, model_id))
 
 
-def list_models(
-    *, provider: Optional[Provider] = None, capability: Optional[Capability] = None
-) -> List[Model]:
+def list_models(*, provider: Provider | None = None, capability: Capability | None = None) -> list[Model]:
     models: Iterable[Model] = MODEL_REGISTRY.values()
     if provider is not None:
         models = (m for m in models if m.provider == provider)
@@ -35,7 +33,7 @@ def list_models(
     return list(models)
 
 
-def list_providers(*, capability: Optional[Capability] = None) -> List[Provider]:
+def list_providers(*, capability: Capability | None = None) -> list[Provider]:
     """Return distinct providers, optionally filtered by capability support.
 
     When capability is provided, only providers that have at least one model
@@ -43,7 +41,7 @@ def list_providers(*, capability: Optional[Capability] = None) -> List[Provider]
     """
     if capability is None:
         return sorted(
-            {provider for (provider, _model_id) in MODEL_REGISTRY.keys()},
+            {provider for (provider, _model_id) in MODEL_REGISTRY},
             key=lambda p: p.value,
         )
 

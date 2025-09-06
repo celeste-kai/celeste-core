@@ -1,7 +1,8 @@
 from __future__ import annotations
 
 from abc import ABC, abstractmethod
-from typing import Any, AsyncIterator
+from collections.abc import AsyncIterator
+from typing import Any
 
 from celeste_core.enums.capability import Capability
 from celeste_core.enums.providers import Provider
@@ -13,7 +14,7 @@ class BaseDocClient(ABC):
         self,
         model: str,
         provider: Provider | None = None,
-        **kwargs: Any,
+        **kwargs: Any,  # noqa: ARG002
     ) -> None:
         """Initialize document intelligence client with validation logic."""
         validate_client_config(model, provider, Capability.DOCUMENT_INTELLIGENCE)
@@ -25,8 +26,6 @@ class BaseDocClient(ABC):
         raise NotImplementedError
 
     @abstractmethod
-    async def stream_generate_content(
-        self, prompt: str, documents: Any, **kwargs: Any
-    ) -> AsyncIterator[Any]:
+    async def stream_generate_content(self, prompt: str, documents: Any, **kwargs: Any) -> AsyncIterator[Any]:
         """Stream the response chunk by chunk."""
         raise NotImplementedError

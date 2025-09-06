@@ -7,9 +7,7 @@ from celeste_core.enums.providers import Provider
 from celeste_core.models.registry import supports
 
 
-def validate_client_config(
-    model: str, provider: Provider | None, capability: Capability
-) -> None:
+def validate_client_config(model: str, provider: Provider | None, capability: Capability) -> None:
     """Validate client configuration (provider + model + capability support).
 
     Args:
@@ -25,7 +23,4 @@ def validate_client_config(
 
     if not supports(provider, model, capability):
         capability_name = capability.name.lower().replace("_", " ")
-        raise ValueError(
-            f"Model '{model}' does not support {capability_name} "
-            f"for provider {provider.value}"
-        )
+        raise ValueError(f"Model '{model}' does not support {capability_name} " f"for provider {provider.value}")

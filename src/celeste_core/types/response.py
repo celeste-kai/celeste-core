@@ -1,9 +1,10 @@
 from __future__ import annotations
 
-from typing import Any, Dict, Generic, Optional, TypeVar
+from typing import Any, Generic, TypeVar
+
+from pydantic import BaseModel, ConfigDict, Field
 
 from celeste_core.enums.providers import Provider
-from pydantic import BaseModel, ConfigDict, Field
 
 T = TypeVar("T")
 
@@ -22,5 +23,5 @@ class AIResponse(BaseModel, Generic[T]):
 
     content: T
 
-    provider: Optional[Provider] = None
-    metadata: Dict[str, Any] = Field(default_factory=dict)
+    provider: Provider | None = None
+    metadata: dict[str, Any] = Field(default_factory=dict)

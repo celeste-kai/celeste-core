@@ -10,16 +10,12 @@ from celeste_core.validation import validate_client_config
 
 
 class BaseImageEditor(ABC):
-    def __init__(
-        self, model: str, provider: Provider | None = None, **kwargs: Any
-    ) -> None:
+    def __init__(self, model: str, provider: Provider | None = None, **kwargs: Any) -> None:  # noqa: ARG002
         """Initialize image editor with validation logic."""
         validate_client_config(model, provider, Capability.IMAGE_EDIT)
         self.model = model
 
     @abstractmethod
-    async def edit_image(
-        self, prompt: str, image: ImageArtifact, **kwargs: Any
-    ) -> ImageArtifact:
+    async def edit_image(self, prompt: str, image: ImageArtifact, **kwargs: Any) -> ImageArtifact:
         """Submit a request to start an image editing job."""
         raise NotImplementedError

@@ -10,16 +10,12 @@ from celeste_core.validation import validate_client_config
 
 
 class BaseTTSClient(ABC):
-    def __init__(
-        self, model: str, provider: Provider | None = None, **kwargs: Any
-    ) -> None:
+    def __init__(self, model: str, provider: Provider | None = None, **kwargs: Any) -> None:  # noqa: ARG002
         """Initialize TTS client with validation logic."""
         validate_client_config(model, provider, Capability.TEXT_TO_SPEECH)
         self.model = model
 
     @abstractmethod
-    async def generate_speech(
-        self, text: str, voice_name: str, **kwargs: Any
-    ) -> AudioArtifact:
+    async def generate_speech(self, text: str, voice_name: str, **kwargs: Any) -> AudioArtifact:
         """Generate speech audio from text with specified voice."""
         raise NotImplementedError
