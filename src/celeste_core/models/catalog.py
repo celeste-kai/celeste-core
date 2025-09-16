@@ -218,6 +218,12 @@ CATALOG: list[Model] = [
         capabilities=Capability.IMAGE_GENERATION,
         display_name="Qwen Image",
     ),
+    Model(
+        id="tencent/HunyuanImage-2.1",
+        provider=Provider.HUGGINGFACE,
+        capabilities=Capability.IMAGE_GENERATION,
+        display_name="HunyuanImage 2.1",
+    ),
     # Local image models
     Model(
         id="stabilityai/sdxl-turbo",
